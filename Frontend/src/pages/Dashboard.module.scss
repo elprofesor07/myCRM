@@ -1,0 +1,312 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.dashboard {
+  .headerControls {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+
+    @include mobile {
+      flex-direction: column;
+      width: 100%;
+
+      > * {
+        width: 100%;
+      }
+    }
+  }
+
+  .statsRow {
+    margin-bottom: 0;
+
+    .growth {
+      color: var(--success-color);
+      font-size: $font-sm;
+      font-weight: $font-medium;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+
+      svg {
+        font-size: $font-xs;
+      }
+
+      &.negative {
+        color: var(--error-color);
+      }
+    }
+  }
+
+  .chartsRow,
+  .tablesRow {
+    margin-bottom: 0;
+  }
+
+  .chartCard {
+    height: 100%;
+    
+    :global(.ant-card-body) {
+      padding: 1rem;
+    }
+  }
+
+  .tableCard {
+    height: 100%;
+
+    :global(.ant-card-body) {
+      padding: 0;
+    }
+
+    :global(.ant-table-wrapper) {
+      .ant-table {
+        border-radius: 0;
+      }
+
+      .ant-table-thead > tr > th {
+        background-color: var(--bg-tertiary);
+        border-bottom: 1px solid var(--border-color);
+        padding: 0.75rem 1rem;
+        font-weight: $font-semibold;
+        font-size: $font-sm;
+        text-transform: uppercase;
+        letter-spacing: 0.025em;
+      }
+
+      .ant-table-tbody > tr > td {
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .ant-table-tbody > tr:last-child > td {
+        border-bottom: none;
+      }
+    }
+
+    .dealName {
+      font-weight: $font-medium;
+      color: var(--text-primary);
+      margin-bottom: 0.125rem;
+    }
+
+    .dealCompany {
+      font-size: $font-sm;
+      color: var(--text-secondary);
+    }
+
+    :global(.ant-list) {
+      .ant-list-item {
+        padding: 1rem;
+        border-bottom: 1px solid var(--border-color);
+
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+
+      .ant-list-item-meta-title {
+        font-weight: $font-medium;
+        color: var(--text-primary);
+        margin-bottom: 0.25rem;
+      }
+
+      .ant-list-item-meta-description {
+        color: var(--text-secondary);
+        font-size: $font-sm;
+      }
+    }
+
+    .conversionRate {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .activityCard {
+    :global(.ant-timeline) {
+      margin-top: 1rem;
+
+      .ant-timeline-item {
+        padding-bottom: 1.5rem;
+
+        &:last-child {
+          padding-bottom: 0;
+        }
+      }
+
+      .ant-timeline-item-dot {
+        background-color: var(--bg-secondary);
+        border-color: var(--primary-color);
+        color: var(--primary-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+
+        svg {
+          font-size: 16px;
+        }
+      }
+    }
+
+    .activityItem {
+      .activityTitle {
+        font-weight: $font-medium;
+        color: var(--text-primary);
+        margin-bottom: 0.25rem;
+      }
+
+      .activityTime {
+        font-size: $font-sm;
+        color: var(--text-tertiary);
+      }
+    }
+  }
+
+  // Widget cards
+  .widgetCard {
+    height: 100%;
+    transition: all $transition-base;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .widgetIcon {
+      font-size: 48px;
+      opacity: 0.1;
+      position: absolute;
+      right: 1rem;
+      top: 1rem;
+    }
+
+    .widgetContent {
+      position: relative;
+      z-index: 1;
+    }
+
+    .widgetTitle {
+      font-size: $font-sm;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.025em;
+    }
+
+    .widgetValue {
+      font-size: $font-3xl;
+      font-weight: $font-bold;
+      color: var(--text-primary);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .widgetTrend {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: $font-sm;
+
+      .trendValue {
+        font-weight: $font-medium;
+      }
+
+      .trendLabel {
+        color: var(--text-secondary);
+      }
+
+      &.positive {
+        .trendValue {
+          color: var(--success-color);
+        }
+      }
+
+      &.negative {
+        .trendValue {
+          color: var(--error-color);
+        }
+      }
+    }
+  }
+
+  // Quick actions
+  .quickActions {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background-color: var(--bg-secondary);
+    border-radius: $radius-md;
+    border: 1px solid var(--border-color);
+
+    h3 {
+      font-size: $font-lg;
+      font-weight: $font-semibold;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+
+    .actionGrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+
+      @include mobile {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .actionCard {
+      @include card(1rem);
+      cursor: pointer;
+      transition: all $transition-fast;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+        border-color: var(--primary-color);
+      }
+
+      .actionIcon {
+        font-size: 24px;
+        color: var(--primary-color);
+        flex-shrink: 0;
+      }
+
+      .actionContent {
+        flex: 1;
+
+        .actionTitle {
+          font-weight: $font-medium;
+          color: var(--text-primary);
+          margin-bottom: 0.125rem;
+        }
+
+        .actionDescription {
+          font-size: $font-sm;
+          color: var(--text-secondary);
+        }
+      }
+    }
+  }
+}
+
+// Dark theme adjustments
+:global(.dark) {
+  .dashboard {
+    .chartCard,
+    .tableCard,
+    .activityCard,
+    .widgetCard {
+      background-color: var(--bg-secondary);
+      border-color: var(--border-color);
+    }
+
+    .quickActions {
+      background-color: var(--bg-tertiary);
+    }
+  }
+}

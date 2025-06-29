@@ -1,0 +1,333 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.authContainer {
+  min-height: 100vh;
+  display: flex;
+  background-color: var(--bg-primary);
+
+  @include mobile {
+    flex-direction: column;
+  }
+}
+
+.authCard {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  background-color: var(--bg-secondary);
+
+  @include desktop {
+    max-width: 50%;
+  }
+}
+
+.authHeader {
+  text-align: center;
+  margin-bottom: 2rem;
+  max-width: 400px;
+  width: 100%;
+
+  h1 {
+    font-size: $font-3xl;
+    font-weight: $font-bold;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+  }
+
+  p {
+    color: var(--text-secondary);
+    font-size: $font-base;
+    margin: 0;
+  }
+}
+
+.authForm {
+  width: 100%;
+  max-width: 400px;
+
+  :global {
+    .ant-form-item {
+      margin-bottom: 1.25rem;
+    }
+
+    .ant-form-item-label {
+      label {
+        font-weight: $font-medium;
+        color: var(--text-primary);
+      }
+    }
+
+    .ant-input-affix-wrapper,
+    .ant-input {
+      height: 44px;
+      border-radius: $radius-base;
+      border-color: var(--border-color);
+      background-color: var(--bg-primary);
+
+      &:hover,
+      &:focus {
+        border-color: var(--primary-color);
+      }
+
+      input {
+        background-color: transparent;
+      }
+    }
+
+    .ant-input-prefix {
+      color: var(--text-tertiary);
+      margin-right: 0.75rem;
+    }
+
+    .ant-btn-primary {
+      height: 44px;
+      font-weight: $font-medium;
+      font-size: $font-base;
+      border-radius: $radius-base;
+      background-color: var(--primary-color);
+      border-color: var(--primary-color);
+
+      &:hover {
+        background-color: var(--primary-color-hover);
+        border-color: var(--primary-color-hover);
+      }
+    }
+
+    .ant-checkbox-wrapper {
+      color: var(--text-secondary);
+
+      &:hover {
+        color: var(--text-primary);
+      }
+    }
+
+    .ant-divider {
+      margin: 1.5rem 0;
+      color: var(--text-tertiary);
+      font-size: $font-sm;
+    }
+  }
+}
+
+.formOptions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.forgotLink {
+  color: var(--primary-color);
+  font-size: $font-sm;
+
+  &:hover {
+    color: var(--primary-color-hover);
+  }
+}
+
+.authFooter {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: $font-base;
+
+  a {
+    color: var(--primary-color);
+    font-weight: $font-medium;
+
+    &:hover {
+      color: var(--primary-color-hover);
+    }
+  }
+}
+
+.authSidebar {
+  flex: 1;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-color-hover) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+
+  @include mobile {
+    display: none;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    animation: float 20s ease-in-out infinite;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+    animation: float 25s ease-in-out infinite reverse;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  33% {
+    transform: translate(30px, -30px) rotate(120deg);
+  }
+  66% {
+    transform: translate(-20px, 20px) rotate(240deg);
+  }
+}
+
+.sidebarContent {
+  position: relative;
+  z-index: 1;
+  max-width: 400px;
+  color: white;
+
+  h2 {
+    font-size: $font-2xl;
+    font-weight: $font-bold;
+    margin-bottom: 2rem;
+  }
+
+  .featureList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      font-size: $font-lg;
+      margin-bottom: 1rem;
+      padding-left: 2rem;
+      position: relative;
+
+      &::before {
+        content: '✓';
+        position: absolute;
+        left: 0;
+        top: 0;
+        font-size: $font-xl;
+        font-weight: $font-bold;
+      }
+    }
+  }
+}
+
+.demoAlert {
+  margin-top: 1.5rem;
+  max-width: 400px;
+  width: 100%;
+  border-radius: $radius-base;
+}
+
+.socialButtons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+
+  button {
+    flex: 1;
+    height: 44px;
+    font-weight: $font-medium;
+    border-radius: $radius-base;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    &.googleButton {
+      background-color: #4285f4;
+      border-color: #4285f4;
+      color: white;
+
+      &:hover {
+        background-color: #357ae8;
+        border-color: #357ae8;
+      }
+    }
+
+    &.githubButton {
+      background-color: #24292e;
+      border-color: #24292e;
+      color: white;
+
+      &:hover {
+        background-color: #1a1e22;
+        border-color: #1a1e22;
+      }
+    }
+  }
+}
+
+.verificationMessage {
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+
+  .icon {
+    font-size: 64px;
+    color: var(--success-color);
+    margin-bottom: 1.5rem;
+  }
+
+  h2 {
+    font-size: $font-2xl;
+    font-weight: $font-bold;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+  }
+
+  p {
+    color: var(--text-secondary);
+    font-size: $font-base;
+    margin-bottom: 2rem;
+  }
+
+  .resendSection {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-secondary);
+  }
+}
+
+// Dark theme adjustments
+:global(.dark) {
+  .authCard {
+    background-color: var(--bg-secondary);
+  }
+
+  .authForm {
+    :global {
+      .ant-input-affix-wrapper,
+      .ant-input {
+        background-color: var(--bg-tertiary);
+        border-color: var(--border-color);
+
+        input {
+          color: var(--text-primary);
+        }
+      }
+    }
+  }
+
+  .demoAlert {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-color);
+  }
+}

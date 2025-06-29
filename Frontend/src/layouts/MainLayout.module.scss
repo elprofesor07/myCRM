@@ -1,0 +1,258 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.layout {
+  min-height: 100vh;
+  background-color: var(--bg-primary);
+}
+
+.sider {
+  background: var(--sidebar-bg);
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 100;
+  overflow: auto;
+
+  :global(.ant-layout-sider-children) {
+    display: flex;
+    flex-direction: column;
+  }
+
+  :global(.ant-menu) {
+    flex: 1;
+    background: transparent;
+    border-right: none;
+
+    .ant-menu-item {
+      margin: 4px 12px;
+      border-radius: 8px;
+      height: 44px;
+      line-height: 44px;
+
+      &.ant-menu-item-selected {
+        background-color: var(--primary-color);
+
+        &::after {
+          display: none;
+        }
+      }
+
+      &:hover:not(.ant-menu-item-selected) {
+        background-color: rgba(255, 255, 255, 0.08);
+      }
+    }
+
+    .ant-menu-item-icon {
+      font-size: 18px;
+    }
+  }
+
+  &:global(.ant-layout-sider-collapsed) {
+    :global(.ant-menu-item) {
+      padding: 0 calc(50% - 12px);
+    }
+  }
+}
+
+.logo {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  background: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+
+  .logoIcon {
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .logoText {
+    font-size: 18px;
+    letter-spacing: -0.5px;
+  }
+}
+
+.sidebarFooter {
+  padding: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mainLayout {
+  margin-left: 240px;
+  transition: margin-left 0.2s;
+
+  @media (max-width: $mobile-breakpoint) {
+    margin-left: 0;
+  }
+
+  :global(.ant-layout-sider-collapsed) + & {
+    margin-left: 80px;
+  }
+}
+
+.header {
+  background: var(--bg-secondary);
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+
+  @media (max-width: $mobile-breakpoint) {
+    padding: 0 16px;
+  }
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+}
+
+.triggerButton {
+  font-size: 20px;
+  height: 40px;
+  width: 40px;
+  margin-right: 16px;
+
+  &:hover {
+    background-color: var(--bg-hover);
+  }
+}
+
+.searchInput {
+  width: 300px;
+  height: 36px;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  cursor: pointer;
+
+  :global(.ant-input) {
+    background-color: transparent;
+    cursor: pointer;
+  }
+
+  &:hover {
+    border-color: var(--primary-color);
+  }
+}
+
+.userButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: auto;
+  padding: 4px 8px;
+  border-radius: 20px;
+
+  &:hover {
+    background-color: var(--bg-hover);
+  }
+
+  .userName {
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+}
+
+.content {
+  margin: 24px;
+  min-height: calc(100vh - 64px - 48px);
+  background-color: transparent;
+
+  @media (max-width: $mobile-breakpoint) {
+    margin: 16px;
+    min-height: calc(100vh - 64px - 32px);
+  }
+}
+
+// Mobile drawer styles
+.mobileDrawer {
+  :global(.ant-drawer-body) {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  :global(.ant-menu) {
+    flex: 1;
+    border-right: none;
+
+    .ant-menu-item {
+      margin: 4px 12px;
+      border-radius: 8px;
+      height: 44px;
+      line-height: 44px;
+
+      &.ant-menu-item-selected {
+        background-color: var(--primary-color);
+        color: #fff;
+
+        .ant-menu-item-icon {
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  .drawerFooter {
+    padding: 16px;
+    border-top: 1px solid var(--border-color);
+  }
+}
+
+.notificationDrawer {
+  :global(.ant-drawer-body) {
+    padding: 0;
+  }
+}
+
+// Dark theme overrides
+:global(.dark) {
+  .sider {
+    background: #0f172a;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
+
+    :global(.ant-menu-item:hover:not(.ant-menu-item-selected)) {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+  }
+
+  .logo {
+    background: rgba(0, 0, 0, 0.3);
+    border-bottom-color: rgba(255, 255, 255, 0.05);
+  }
+
+  .header {
+    background: #1e293b;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .searchInput {
+    background-color: #0f172a;
+    border-color: #334155;
+
+    &:hover {
+      border-color: var(--primary-color);
+    }
+  }
+}

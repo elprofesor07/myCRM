@@ -1,0 +1,238 @@
+// Breakpoint mixins
+@mixin mobile {
+  @media (max-width: #{$mobile-breakpoint - 1px}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: #{$mobile-breakpoint}) and (max-width: #{$tablet-breakpoint - 1px}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$tablet-breakpoint}) {
+    @content;
+  }
+}
+
+@mixin wide {
+  @media (min-width: #{$wide-breakpoint}) {
+    @content;
+  }
+}
+
+// Flex mixins
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-start {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+@mixin flex-end {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+// Card mixin
+@mixin card($padding: $card-padding) {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: $radius-md;
+  padding: $padding;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow $transition-fast;
+  
+  &:hover {
+    box-shadow: var(--shadow-md);
+  }
+}
+
+// Button mixin
+@mixin button-variant($bg-color, $text-color: white) {
+  background-color: $bg-color;
+  color: $text-color;
+  border: 1px solid $bg-color;
+  
+  &:hover {
+    background-color: darken($bg-color, 5%);
+    border-color: darken($bg-color, 5%);
+    color: $text-color;
+  }
+  
+  &:active {
+    background-color: darken($bg-color, 10%);
+    border-color: darken($bg-color, 10%);
+  }
+  
+  &:focus {
+    box-shadow: 0 0 0 2px rgba($bg-color, 0.2);
+  }
+  
+  &:disabled {
+    background-color: lighten($bg-color, 20%);
+    border-color: lighten($bg-color, 20%);
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+
+// Text truncate mixin
+@mixin text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin text-truncate-lines($lines: 2) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// Scrollbar mixin
+@mixin custom-scrollbar($width: 8px, $track-color: var(--bg-secondary), $thumb-color: var(--border-color)) {
+  &::-webkit-scrollbar {
+    width: $width;
+    height: $width;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background-color: $track-color;
+    border-radius: $radius-full;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background-color: $thumb-color;
+    border-radius: $radius-full;
+    
+    &:hover {
+      background-color: darken($thumb-color, 10%);
+    }
+  }
+}
+
+// Focus ring mixin
+@mixin focus-ring($color: var(--primary-color)) {
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba($color, 0.2);
+  }
+  
+  &:focus-visible {
+    outline: 2px solid $color;
+    outline-offset: 2px;
+  }
+}
+
+// Transition mixin
+@mixin transition($properties...) {
+  $transitions: ();
+  @each $property in $properties {
+    $transitions: append($transitions, $property $transition-base, comma);
+  }
+  transition: $transitions;
+}
+
+// Status color mixin
+@mixin status-color($status) {
+  @if $status == 'success' {
+    color: var(--success-color);
+    background-color: rgba($success-color, 0.1);
+    border-color: var(--success-color);
+  } @else if $status == 'warning' {
+    color: var(--warning-color);
+    background-color: rgba($warning-color, 0.1);
+    border-color: var(--warning-color);
+  } @else if $status == 'error' {
+    color: var(--error-color);
+    background-color: rgba($error-color, 0.1);
+    border-color: var(--error-color);
+  } @else if $status == 'info' {
+    color: var(--info-color);
+    background-color: rgba($info-color, 0.1);
+    border-color: var(--info-color);
+  }
+}
+
+// Grid layout mixin
+@mixin grid($columns: 12, $gap: 24px) {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+  gap: $gap;
+  
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+// Aspect ratio mixin
+@mixin aspect-ratio($width, $height) {
+  position: relative;
+  
+  &::before {
+    content: '';
+    display: block;
+    padding-top: percentage($height / $width);
+  }
+  
+  > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+// Loading skeleton mixin
+@mixin skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--bg-tertiary) 25%,
+    var(--bg-secondary) 50%,
+    var(--bg-tertiary) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+  
+  @keyframes skeleton-loading {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+}
+
+// Badge mixin
+@mixin badge($bg-color, $text-color: white) {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  font-size: $font-xs;
+  font-weight: $font-medium;
+  line-height: 1;
+  color: $text-color;
+  background-color: $bg-color;
+  border-radius: $radius-full;
+  white-space: nowrap;
+}

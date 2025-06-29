@@ -1,0 +1,115 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.errorBoundary {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background-color: var(--bg-primary);
+
+  :global {
+    .ant-result {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .ant-result-icon {
+      .anticon {
+        font-size: 72px;
+        color: var(--error-color);
+      }
+    }
+
+    .ant-result-title {
+      font-size: $font-2xl;
+      font-weight: $font-bold;
+      color: var(--text-primary);
+    }
+
+    .ant-result-subtitle {
+      font-size: $font-base;
+      color: var(--text-secondary);
+      margin-top: 1rem;
+    }
+
+    .ant-result-extra {
+      margin-top: 2rem;
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+
+      @include mobile {
+        flex-direction: column;
+        width: 100%;
+
+        .ant-btn {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .errorDetails {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: $radius-base;
+    text-align: left;
+    max-width: 100%;
+
+    :global {
+      .ant-typography {
+        margin-bottom: 0.5rem;
+      }
+
+      code {
+        display: block;
+        padding: 0.5rem;
+        background-color: var(--bg-tertiary);
+        border-radius: $radius-sm;
+        font-size: $font-sm;
+        overflow-x: auto;
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+    }
+
+    details {
+      margin-top: 1rem;
+
+      summary {
+        cursor: pointer;
+        font-weight: $font-medium;
+        color: var(--primary-color);
+        user-select: none;
+
+        &:hover {
+          color: var(--primary-color-hover);
+        }
+      }
+
+      pre {
+        margin-top: 0.5rem;
+        padding: 1rem;
+        background-color: var(--bg-tertiary);
+        border-radius: $radius-sm;
+        overflow-x: auto;
+        font-size: $font-xs;
+      }
+    }
+  }
+}
+
+// Dark theme adjustments
+:global(.dark) {
+  .errorBoundary {
+    .errorDetails {
+      background-color: var(--bg-tertiary);
+      border-color: var(--border-color-dark);
+    }
+  }
+}

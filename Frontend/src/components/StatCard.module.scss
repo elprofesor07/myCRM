@@ -1,0 +1,101 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.statCard {
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  transition: all $transition-base;
+  border-color: var(--border-color);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background-color: var(--stat-color, var(--primary-color));
+    transition: width $transition-base;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+
+    &::before {
+      width: 6px;
+    }
+  }
+
+  &.clickable {
+    cursor: pointer;
+  }
+
+  :global(.ant-card-body) {
+    padding: 20px 24px;
+
+    @include mobile {
+      padding: 16px 20px;
+    }
+  }
+
+  .cardContent {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .prefix {
+    font-size: 32px;
+    color: var(--stat-color, var(--primary-color));
+    opacity: 0.8;
+    flex-shrink: 0;
+
+    @include mobile {
+      font-size: 28px;
+    }
+  }
+
+  .statInfo {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .title {
+    font-size: $font-sm;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+    font-weight: $font-medium;
+  }
+
+  .value {
+    font-size: $font-2xl;
+    font-weight: $font-bold;
+    color: var(--text-primary);
+    line-height: 1;
+
+    @include mobile {
+      font-size: $font-xl;
+    }
+  }
+
+  .suffix {
+    margin-top: 8px;
+    font-size: $font-sm;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+}
+
+// Dark theme adjustments
+:global(.dark) {
+  .statCard {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color);
+  }
+}
